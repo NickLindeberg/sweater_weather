@@ -5,8 +5,11 @@ class Api::V1::GifsController < ApplicationController
     coords = googe_data.get_coordinates(params[:location])
     darksky = DarkskyService.new
     weather = darksky.get_city_forecast(coords[:lat], coords[:lng])
+    daily = weather[:daily]
+    summary = daily[:data][0][:summary]
     gifs = GiphyService.new
-    # gif = gifs.get_gif(params[:])
+    require "pry"; binding.pry
+    giphy_search = gifs.get_gif(summary)
   end
 
 end
