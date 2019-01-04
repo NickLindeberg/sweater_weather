@@ -7,6 +7,7 @@ class Api::V1::GifsController < ApplicationController
     weather = darksky.get_city_forecast(coords[:lat], coords[:lng])
     days = weather[:daily][:data]
     ##days give a array of hashes of days to be passed to the poro
+    Gifs.new(days)
     # # summary = daily[:data][0][:summary]
     # gif_service = GiphyService.new
     # render json: giphy_search
