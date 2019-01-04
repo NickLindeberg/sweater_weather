@@ -8,8 +8,8 @@ class Api::V1::GifsController < ApplicationController
     daily = weather[:daily]
     summary = daily[:data][0][:summary]
     gifs = GiphyService.new
-    require "pry"; binding.pry
     giphy_search = gifs.get_gif(summary)
+    render json: giphy_search
   end
 
 end
