@@ -1,7 +1,7 @@
 class GiphyService
 
   def get_gif(search_term)
-    hash = get_json("v1/gifs/search?api_key#{ENV['GIPHY_API_KEY']}&q=search_term")
+    hash = get_json("v1/gifs/search?api_key#{ENV['GIPHY_API_KEY']}&q=#{search_term}")
   end
 
   def conn
