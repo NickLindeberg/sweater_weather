@@ -10,6 +10,8 @@ class Api::V1::GifsController < ApplicationController
     day_weather = parsed_summaries.day_parser
     #TODO searilize output data to add time summary and url for json render
     render json: day_weather
+    # render json: GifSerializer.new(day_weather)
+
   end
 
 end
