@@ -9,10 +9,8 @@ class Gifs
       d[:summary]
     end
     service = GiphyService.new
-    day_array.each do |day|
+    day_array.map do |day|
       service.get_gif(day)
     end
   end
-
-
 end

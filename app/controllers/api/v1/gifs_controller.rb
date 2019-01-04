@@ -9,10 +9,7 @@ class Api::V1::GifsController < ApplicationController
     ##days give a array of hashes of days to be passed to the poro
     parsed_summaries = Gifs.new(days)
     day_weather = parsed_summaries.day_parser
-    require "pry"; binding.pry
-    # # summary = daily[:data][0][:summary]
-    # gif_service = GiphyService.new
-    # render json: giphy_search
+    render json: day_weather
   end
 
 end
