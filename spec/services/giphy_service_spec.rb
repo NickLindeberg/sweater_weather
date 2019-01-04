@@ -12,6 +12,7 @@ describe GiphyService do
       data = giphy.get_gif("pizza")
 
       expect(data).to be_a(Hash)
+      expect(data).to have_key(:data)
     end
   end
 end
