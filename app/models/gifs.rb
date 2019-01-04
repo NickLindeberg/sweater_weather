@@ -2,12 +2,17 @@ class Gifs
 
   def initialize(days)
     @days = days
-    require "pry"; binding.pry
   end
 
   def day_parser
-    @days.map do |d|
+    day_array = @days.map do |d|
       d[:summary]
     end
+    service = GiphyService.new
+    day_array.each do |day|
+      service.get_gif(day)
+    end
   end
+
+
 end
