@@ -30,9 +30,9 @@ describe 'request' do
 
     post "/api/v1/sessions", params: user_data, headers: headers
 
-    response_hash = JSON.parse(response.body, symbolize_names: true)
     expect(response).to be_successful
-
+require "pry"; binding.pry
+    response_hash = JSON.parse(response.body, symbolize_names: true)
 
   end
 end
