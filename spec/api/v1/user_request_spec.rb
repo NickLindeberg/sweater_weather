@@ -18,9 +18,9 @@ describe 'request' do
     expect(request.params.keys).to include("user")
     expect(response).to be_successful
 
-    response_hash = JSON.parse(response.body)
+    response_hash = JSON.parse(response.body, symbolize_names: true)
 
-    expect(response_hash.keys).to include("api_key")
+    expect(response_hash.keys).to include(:api_key)
   end
 
   it 'user can sign in' do
@@ -30,7 +30,7 @@ describe 'request' do
 
     post "/api/v1/sessions", params: user_data, headers: headers
 
-    response_hash = JSON.parse(response.body)
+    response_hash = JSON.parse(response.body, symbolize_names: true)
     expect(response).to be_successful
 
 
