@@ -4,6 +4,9 @@
 
   has_secure_password
 
+  has_many :user_favorites
+  has_many :favorites, through: :user_favorites
+
   def self.create_user(params)
     hash = {}
     hash[:email] = params["email"]
