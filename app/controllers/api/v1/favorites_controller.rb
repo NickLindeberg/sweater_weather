@@ -5,7 +5,7 @@ class Api::V1::FavoritesController < ApplicationController
 
     if user
 
-      
+
 
 
       favorites = user.favorites.map do |fav|
@@ -43,7 +43,6 @@ class Api::V1::FavoritesController < ApplicationController
 
     if user
       favorite = user.favorites.find_by(location: clean_up_city(params[:location]))
-      require "pry"; binding.pry
       favorite.delete
       render json: "Favorite Removed", status: 200
     else

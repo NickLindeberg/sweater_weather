@@ -21,4 +21,10 @@ describe 'requests' do
     expect(parsed).to have_key(:hourly)
     expect(parsed).to have_key(:daily)
   end
+
+  it 'response also returns giphy url' do
+    get "/api/v1/forecast?location=denver,co"
+
+    
+  end
 end
