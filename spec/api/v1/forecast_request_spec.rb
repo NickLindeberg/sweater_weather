@@ -23,8 +23,16 @@ describe 'requests' do
   end
 
   it 'response also returns giphy url' do
-    get "/api/v1/forecast?location=denver,co"
+    VCR.use_cassette("giphy_forecast_request") do
 
-    
+      get "/api/v1/forecast?location=denver,co"
+
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(parsed).to have_key(:embeded_url)
+    end
   end
 end
+
+# hash[:data][0][:embed_url]
