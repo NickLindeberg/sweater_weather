@@ -8,11 +8,10 @@ describe 'requests' do
       expect(response).to be_successful
 
       parsed = JSON.parse(response.body, symbolize_names: true)
-      require "pry"; binding.pry
-      expect(parsed.keys).to eq("time")
-      expect(parsed.keys).to eq("summary")
-      expect(parsed.keys).to eq("giphy_url")
-
+require "pry"; binding.pry
+      expect(parsed[:attributes].first).to have_key(:time)
+      expect(parsed[:attributes].first).to have_key(:daily_summary)
+      expect(parsed[:attributes].first).to have_key(:giphy_url)
     end
   end
 end
