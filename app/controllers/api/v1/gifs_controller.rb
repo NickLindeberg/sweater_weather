@@ -1,8 +1,12 @@
 class Api::V1::GifsController < ApplicationController
 
   def show
-    googe_data = GoogleCoordinateService.new
-    coords = googe_data.get_coordinates(params[:location])
+
+    # GifSerializer.new(GifBuilder(params[:location]))
+    # Will refactor if I have time
+
+    google_data = GoogleCoordinateService.new
+    coords = google_data.get_coordinates(params[:location])
 
     darksky = DarkskyService.new
     weather = darksky.get_city_forecast(coords[:lat], coords[:lng])
@@ -12,13 +16,16 @@ class Api::V1::GifsController < ApplicationController
     service = GiphyService.new
     days = weather[:daily][:data]
 
-    parsed_summaries = Gifs.new(days)
-require "pry"; binding.pry
-    # day_weather = parsed_summaries.day_parser
-    # render json: day_weather
+    hash = Hash.new(0)
+    times = days.map do |day|
+      hash.merge!({time: day[:time]})
+      summary = hash.merge!({daily_summary: day[:summary]})
+      hash.merge!({giphy_url: service.get_gif_url(summary)})
+    end
 
-    time = {time: weather[:daily][:time]}
+    attributes = Hash.new()
+    attributes.merge!(attributes: times)
 
+    render json: attributes
   end
-
 end
