@@ -24,6 +24,9 @@ class ForecastBuilder
   end
 
   def hourly
-    @weather_adapter.build(@coords)[:hourly]
+    hours = @weather_adapter.build(@coords)[:hourly][:data]
+    total = hours.map do |data|
+      HourlyWeather.new(data)
+    end.first(8)
   end
 end
