@@ -4,10 +4,6 @@ class Api::V1::FavoritesController < ApplicationController
     user = User.find_by(api_key: params[:api_key])
 
     if user
-
-
-
-
       favorites = user.favorites.map do |fav|
         googe_data = GoogleCoordinateService.new
         coords = googe_data.get_coordinates(fav[:location])
@@ -43,7 +39,7 @@ class Api::V1::FavoritesController < ApplicationController
 
     if user
       favorite = user.favorites.find_by(location: clean_up_city(params[:location]))
-      favorite.delete
+      favorite.destroy
       render json: "Favorite Removed", status: 200
     else
       render json: "Favorite Not Deleted", status: 401
