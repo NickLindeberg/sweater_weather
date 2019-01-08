@@ -9,8 +9,7 @@ describe 'request' do
     post "/api/v1/favorites", :params => {"location"=>"Denver, CO",
       "api_key": "6780",
        "controller"=>"api/v1/favorites",
-       "action"=>"create",
-       "user"=>{"email"=>"whatever@example.com"}}, :headers => headers
+       "action"=>"create"}, :headers => headers
 
     expect(request.params.keys).to include("location")
     expect(request.params.keys).to include("api_key")
@@ -28,8 +27,7 @@ describe 'request' do
     post "/api/v1/favorites", :params => {"location"=>"Denver, CO",
       "api_key": "wrong",
        "controller"=>"api/v1/favorites",
-       "action"=>"create",
-       "user"=>{"email"=>"whatever@example.com"}}, :headers => headers
+       "action"=>"create"}, :headers => headers
 
     expect(request.params.keys).to include("location")
     expect(request.params.keys).to include("api_key")

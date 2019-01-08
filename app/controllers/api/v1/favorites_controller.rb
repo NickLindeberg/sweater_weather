@@ -34,4 +34,14 @@ class Api::V1::FavoritesController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find_by(api_key: params[:api_key])
+
+    if user
+
+    else
+      render json: "Favorite Not Deleted", status: 401
+    end
+  end
+
 end
