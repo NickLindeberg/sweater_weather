@@ -8,7 +8,10 @@ describe 'requests' do
       expect(response).to be_successful
 
       parsed = JSON.parse(response.body, symbolize_names: true)
-      #currently parsed is just an array of giphy urls, not what we are looking for. 
+      expect(parsed.keys).to eq("time")
+      expect(parsed.keys).to eq("summary")
+      expect(parsed.keys).to eq("giphy_url")
+      
     end
   end
 end
