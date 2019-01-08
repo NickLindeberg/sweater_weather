@@ -8,7 +8,7 @@ describe 'requests' do
       expect(response).to be_successful
 
       parsed = JSON.parse(response.body, symbolize_names: true)
-      expect(parsed).to be_a(Array)
+      #currently parsed is just an array of giphy urls, not what we are looking for. 
     end
   end
 end
