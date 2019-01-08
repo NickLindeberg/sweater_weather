@@ -7,14 +7,17 @@ class Api::V1::GifsController < ApplicationController
     darksky = DarkskyService.new
     weather = darksky.get_city_forecast(coords[:lat], coords[:lng])
 
-    weather_summary = weather[:currently][:summary]
-    require "pry"; binding.pry
+    weather_summary = weather[:daily][:summary]
+
     service = GiphyService.new
-    # days = weather[:daily][:data]
+    days = weather[:daily][:data]
 
     parsed_summaries = Gifs.new(days)
-    day_weather = parsed_summaries.day_parser
-    render json: day_weather
+require "pry"; binding.pry
+    # day_weather = parsed_summaries.day_parser
+    # render json: day_weather
+
+    time = {time: weather[:daily][:time]}
 
   end
 
