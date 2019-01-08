@@ -2,7 +2,8 @@ class Api::V1::GifsController < ApplicationController
 
   def show
 
-    GifSerializer.new(GifBuilder(params[:location]))
+    # GifSerializer.new(GifBuilder(params[:location]))
+    # Will refactor if I have time
 
     google_data = GoogleCoordinateService.new
     coords = google_data.get_coordinates(params[:location])
