@@ -30,9 +30,7 @@ describe 'requests' do
       parsed = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
-      expect(parsed).to have_key(:embeded_url)
+      expect(parsed).to have_key(:giphy_url)
     end
   end
 end
-
-# hash[:data][0][:embed_url]
