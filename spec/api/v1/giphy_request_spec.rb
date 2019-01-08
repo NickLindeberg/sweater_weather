@@ -8,7 +8,11 @@ describe 'requests' do
       expect(response).to be_successful
 
       parsed = JSON.parse(response.body, symbolize_names: true)
-      expect(parsed).to be_a(Array)
+      require "pry"; binding.pry
+      expect(parsed.keys).to eq("time")
+      expect(parsed.keys).to eq("summary")
+      expect(parsed.keys).to eq("giphy_url")
+
     end
   end
 end

@@ -21,4 +21,16 @@ describe 'requests' do
     expect(parsed).to have_key(:hourly)
     expect(parsed).to have_key(:daily)
   end
+
+  it 'response also returns giphy url' do
+    VCR.use_cassette("giphy_forecast_request") do
+
+      get "/api/v1/forecast?location=denver,co"
+
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(parsed).to have_key(:giphy_url)
+    end
+  end
 end

@@ -5,6 +5,12 @@ class Gifs
   end
 
   def day_parser
+    require "pry"; binding.pry
+    # googe_data = GoogleCoordinateService.new
+    # coords = googe_data.get_coordinates(params[:location])
+    # darksky = DarkskyService.new
+    # weather = darksky.get_city_forecast(coords[:lat], coords[:lng])
+    # giphy = GiphyService.new
     day_array = @days.map do |d|
       d[:summary]
     end
@@ -16,4 +22,7 @@ class Gifs
       ob[:data][0][:embed_url]
     end
   end
+
+
+
 end
