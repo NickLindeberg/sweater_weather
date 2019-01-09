@@ -8,12 +8,15 @@ describe 'request' do
 
     headers = { "Content_Type" => "application/json", "Accept" => "application/json" }
 
+    expect(Favorite.count).to eq(2)
+
     delete "/api/v1/favorites", :params => {"location"=>"Denver, CO",
       "api_key": "6780",
        "controller"=>"api/v1/favorites",
        "action"=>"destroy"}, :headers => headers
 
     expect(response).to be_successful
+    expect(response.status).to eq(204)
     expect(Favorite.count).to eq(1)
     expect(Favorite.first).to eq(favorite_2)
   end
@@ -30,6 +33,7 @@ describe 'request' do
        "controller"=>"api/v1/favorites",
        "action"=>"destroy"}, :headers => headers
 
+    expect(response.status).to eq(401)
     expect(Favorite.count).to eq(2)
     expect(Favorite.first).to eq(favorite_1)
   end

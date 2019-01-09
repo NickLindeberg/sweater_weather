@@ -40,7 +40,7 @@ class Api::V1::FavoritesController < ApplicationController
     if user
       favorite = user.favorites.find_by(location: clean_up_city(params[:location]))
       favorite.destroy
-      render json: "Favorite Removed", status: 200
+      render json: "Favorite Removed", status: 204
     else
       render json: "Favorite Not Deleted", status: 401
     end
