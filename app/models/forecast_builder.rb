@@ -1,18 +1,30 @@
 class ForecastBuilder
+  attr_reader :location
 
-  def build_forecast(location)
-    googe_data = GoogleCoordinateService.new
-    coords = googe_data.get_coordinates(location)
-
-    darksky = DarkskyService.new
-    weather = darksky.get_city_forecast(coords[:lat], coords[:lng])
-
-    giphy = GiphyService.new
-    giphy_url = {"giphy_url": giphy.get_gif_url(weather[:currently][:summary])}
-
-    weather_response = Hash.new()
-    weather_response.merge!(weather)
-    weather_response.merge!(giphy_url)
+  def initialize(location)
+    @location = location
+    @weather_adapter = WeatherAdapter.new
+    @coordinate_adapter = CoordinatesAdapter.new
+    @coords = @coordinate_adapter.build(@location)
   end
 
+  def currently
+    current = @weather_adapter.build(@coords)[:currently]
+    CurrentWeather.new(current)
+  end
+
+  def daily
+    days = @weather_adapter.build(@coords)[:daily][:data]
+    require "pry"; binding.pry
+    total = days.map do |data|
+      DailyWeather.new(data)
+    end
+  end
+
+  def hourly
+    hours = @weather_adapter.build(@coords)[:hourly][:data]
+    total = hours.map do |data|
+      HourlyWeather.new(data)
+    end.first(8)
+  end
 end
