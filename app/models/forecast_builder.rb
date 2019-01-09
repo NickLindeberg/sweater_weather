@@ -1,4 +1,5 @@
 class ForecastBuilder
+  attr_reader :location
 
   def initialize(location)
     @location = location
@@ -8,12 +9,9 @@ class ForecastBuilder
     @coords = @coordinate_adapter.build(@location)
   end
 
-  def location
-    @location
-  end
-
   def currently
-    @weather_adapter.build(@coords)[:currently]
+    current = @weather_adapter.build(@coords)[:currently]
+    CurrentWeather.new(current)
   end
 
   def daily

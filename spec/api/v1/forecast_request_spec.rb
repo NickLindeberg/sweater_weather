@@ -25,7 +25,7 @@ describe 'requests' do
       expect(parsed[:data][:attributes]).to have_key(:hourly)
       expect(parsed[:data][:attributes]).to have_key(:daily)
       expect(parsed[:data][:attributes][:daily].count).to eq(8)
-
+require "pry"; binding.pry
       expect(parsed[:data][:attributes][:hourly].count).to eq(8)
     end
   end
