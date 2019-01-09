@@ -11,14 +11,15 @@ class FavoriteBuilder
   end
 
   def body
-    data = {}
-    location = @favorites.map do |fav|
-      loc = {location: fav.location}
-      data.merge!(loc)
+    body = []
+    favs = @favorites.map do |fav|
+      data = {}
+      data[:location] = fav.location
       coords = @coordinate_adapter.build(fav.location)
       weather = @weather_adapter.build(coords)[:currently]
-      cur = {current_weather: weather}
-      data.merge!(cur)
+      data[:current_weather] = weather
+      data
+      body << data
     end
   end
 end
