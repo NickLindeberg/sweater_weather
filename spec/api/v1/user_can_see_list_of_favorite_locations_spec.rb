@@ -17,12 +17,13 @@ describe 'request' do
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
-      parsed = JSON.parse(response.body, symbolize_names: true)[:data][:attributes][:body]
+      parsed = JSON.parse(response.body, symbolize_names: true)[:data][:attributes][:body][0]
 
       expect(parsed.first.keys[0]).to eq(:location)
       expect(parsed.first.keys[1]).to eq(:current_weather)
       expect(parsed.last.keys[0]).to eq(:location)
       expect(parsed.last.keys[1]).to eq(:current_weather)
+      expect(parsed.first[:location]).to eq("denver,co")
       expect(parsed.last[:location]).to eq("golden,co")
     end
   end
