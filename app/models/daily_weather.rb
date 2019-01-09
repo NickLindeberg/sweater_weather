@@ -12,7 +12,7 @@ class DailyWeather
 
   def initialize(data)
     @time = data[:time]
-    @summary = data[:summary]
+    @summary = data[:summary].gsub(/[^0-9a-z ]/i, '')
     @icon = [:icon]
     @precipiation = [:precipProbability]
     @icon = [:icon]

@@ -2,7 +2,7 @@ class Api::V1::GifsController < ApplicationController
 
   def show
 
-    # GifSerializer.new(GifBuilder(params[:location]))
+    GifSerializer.new(GifBuilder.new(params[:location]))
     # Will refactor if I have time
 
     google_data = GoogleCoordinateService.new
@@ -25,7 +25,7 @@ class Api::V1::GifsController < ApplicationController
 
     attributes = Hash.new()
     attributes.merge!(attributes: times)
-
+require "pry"; binding.pry
     render json: attributes
   end
 end
