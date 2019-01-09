@@ -7,7 +7,8 @@ class DailyWeather
               :icon,
               :high,
               :low,
-              :visiabity
+              :visiabity,
+              :gif_url
 
   def initialize(data)
     @time = data[:time]
@@ -18,6 +19,8 @@ class DailyWeather
     @high = [:temperatureHigh]
     @low = [:temperatureLow]
     @visibility = [:visibility]
+    gif_adapter = GifAdapter.new
+    @gif_url = gif_adapter.build(@summary)
   end
 
 end

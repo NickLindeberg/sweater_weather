@@ -5,7 +5,6 @@ class ForecastBuilder
     @location = location
     @weather_adapter = WeatherAdapter.new
     @coordinate_adapter = CoordinatesAdapter.new
-    @gif_adapter = GifAdapter.new
     @coords = @coordinate_adapter.build(@location)
   end
 
@@ -16,6 +15,7 @@ class ForecastBuilder
 
   def daily
     days = @weather_adapter.build(@coords)[:daily][:data]
+    require "pry"; binding.pry
     total = days.map do |data|
       DailyWeather.new(data)
     end

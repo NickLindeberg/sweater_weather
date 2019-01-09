@@ -18,29 +18,16 @@ describe 'requests' do
     VCR.use_cassette("giphy_forecast_request") do
       get "/api/v1/forecast?location=denver,co"
 
-      parsed = JSON.parse(response.body, symbolize_names: true)
+      parsed = JSON.parse(response.body, symbolize_names: true)[:data][:attributes]
       expect(parsed).to be_a(Hash)
 
-      expect(parsed[:data][:attributes]).to have_key(:daily)
-      expect(parsed[:data][:attributes]).to have_key(:hourly)
-      expect(parsed[:data][:attributes]).to have_key(:daily)
-      expect(parsed[:data][:attributes][:daily].count).to eq(8)
-require "pry"; binding.pry
-      expect(parsed[:data][:attributes][:hourly].count).to eq(8)
-    end
-  end
+      expect(parsed).to have_key(:daily)
+      expect(parsed).to have_key(:hourly)
+      expect(parsed).to have_key(:currently)
 
-
-
-  xit 'response also returns giphy url' do
-    VCR.use_cassette("giphy_forecast_request") do
-
-      get "/api/v1/forecast?location=denver,co"
-
-      parsed = JSON.parse(response.body, symbolize_names: true)
-
-      expect(response).to be_successful
-      expect(parsed).to have_key(:giphy_url)
+      expect(parsed[:daily].first).to have_key(:gif_url)
+      expect(parsed[:daily].count).to eq(8)
+      expect(parsed[:hourly].count).to eq(8)
     end
   end
 end

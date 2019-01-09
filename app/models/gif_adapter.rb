@@ -1,8 +1,8 @@
 class GifAdapter
 
-  def build(weather)
+  def build(weather_summary)
     service = GiphyService.new
-    service.get_gif_url(weather)
+    service.get_gif_url(weather_summary)
   end
 
 end
