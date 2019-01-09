@@ -7,20 +7,18 @@ describe 'request' do
        "password"=>"password",
        "password_confirmation"=>"password",
        "controller"=>"api/v1/users",
-       "action"=>"create",
-       "user"=>{"email"=>"whatever@example.com"}}, :headers => headers
+       "action"=>"create"}, :headers => headers
 
     expect(request.params.keys).to include("email")
     expect(request.params.keys).to include("password")
     expect(request.params.keys).to include("password_confirmation")
-    expect(request.params.keys).to include("controller")
-    expect(request.params.keys).to include("action")
-    expect(request.params.keys).to include("user")
+
     expect(response).to be_successful
 
     response_hash = JSON.parse(response.body, symbolize_names: true)
 
     expect(response_hash.keys).to include(:api_key)
+    expect(response.status).to eq(201)
   end
 
   it 'user can sign in' do
